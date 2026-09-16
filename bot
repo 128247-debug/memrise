@@ -91,10 +91,14 @@ function createSmartProbabilityTranslatorGUI() {
         if (!v || !a) return;
 
         window.memriseAnswerCache[v] = window.memriseAnswerCache[v] || [];
-        if (!window.memriseAnswerCache[v].includes(a)) window.memriseAnswerCache[v].unshift(a);
+        const indexV = window.memriseAnswerCache[v].indexOf(a);
+        if (indexV !== -1) window.memriseAnswerCache[v].splice(indexV, 1);
+        window.memriseAnswerCache[v].unshift(a);
 
         window.memriseAnswerCache[a] = window.memriseAnswerCache[a] || [];
-        if (!window.memriseAnswerCache[a].includes(v)) window.memriseAnswerCache[a].unshift(v);
+        const indexA = window.memriseAnswerCache[a].indexOf(v);
+        if (indexA !== -1) window.memriseAnswerCache[a].splice(indexA, 1);
+        window.memriseAnswerCache[a].unshift(v);
     }
 
     function klikVolgendeKnopOfEnter() {
@@ -130,7 +134,7 @@ function createSmartProbabilityTranslatorGUI() {
 
             if (frTekst && nlTekst) {
                 slaOpInGeheugen(frTekst, nlTekst);
-                statusBox.innerHTML = `⚠️ <b>Fout opgeslagen in geheugen:</b><br>${frTekst} = ${nlTekst}`;
+                statusBox.innerHTML = `⚠️ <b>Juiste antwoord bijgewerkt in geheugen:</b><br>${frTekst} = ${nlTekst}`;
                 klikVolgendeKnopOfEnter();
                 return true;
             }
@@ -144,7 +148,7 @@ function createSmartProbabilityTranslatorGUI() {
 
         if (hoofdelement && subelement && hoofdelement.innerText && subelement.innerText) {
             slaOpInGeheugen(hoofdelement.innerText, subelement.innerText);
-            statusBox.innerHTML = `🧠 <b>Geleerd:</b><br>${hoofdelement.innerText} = ${subelement.innerText}`;
+            statusBox.innerHTML = `🧠 <b>Geleerd & Geupdated:</b><br>${hoofdelement.innerText} = ${subelement.innerText}`;
             klikVolgendeKnopOfEnter();
             return true;
         }
@@ -182,7 +186,7 @@ function createSmartProbabilityTranslatorGUI() {
     }
 
     function isWaarschijnlijkNederlands(tekst) {
-        const nlWoorden = ['de', 'het', 'een', 'van', 'tot', 'later', 'hoe', 'gaat', 'met', 'jou', 'ja', 'nee', 'dag', 'hallo', 'hoi', 'dank', 'wel', 'bedankt'];
+        const nlWoorden = ['de', 'het', 'een', 'van', 'tot', 'later', 'hoe', 'gaat', 'met', 'jou', 'ja', 'dag', 'hallo', 'hoi', 'dank', 'wel', 'bedankt'];
         return tekst.toLowerCase().split(/\s+/).some(w => nlWoorden.includes(w));
     }
 
@@ -195,7 +199,7 @@ function createSmartProbabilityTranslatorGUI() {
         inputElement.dispatchEvent(new Event('input', { bubbles: true }));
         inputElement.dispatchEvent(new Event('change', { bubbles: true }));
 
-        await new Promise(r => setTimeout(r, 150));
+        await new Promise(r => setTimeout(r, 30));
         klikVolgendeKnopOfEnter();
     }
 
@@ -221,11 +225,11 @@ function createSmartProbabilityTranslatorGUI() {
 
             if (besteKnop && besteScore > 60) {
                 besteKnop.click();
-                await new Promise(r => setTimeout(r, 120));
+                await new Promise(r => setTimeout(r, 30));
             }
         }
 
-        await new Promise(r => setTimeout(r, 200));
+        await new Promise(r => setTimeout(r, 50));
         klikVolgendeKnopOfEnter();
         statusBox.innerHTML = `✅ <b>Woorden ingeklikt & verzonden!</b>`;
     }
@@ -249,8 +253,22 @@ function createSmartProbabilityTranslatorGUI() {
         const reader = new FileReader();
         reader.onload = (event) => {
             try {
-                window.memriseAnswerCache = { ...window.memriseAnswerCache, ...JSON.parse(event.target.result) };
-                statusBox.innerText = "📂 Woordenlijst succesvol ingeladen!";
+                const geïmporteerdeData = JSON.parse(event.target.result);
+                
+                Object.keys(geïmporteerdeData).forEach(key => {
+                    const nieuweWaarden = Array.isArray(geïmporteerdeData[key]) ? geïmporteerdeData[key] : [geïmporteerdeData[key]];
+                    if (!window.memriseAnswerCache[key]) {
+                        window.memriseAnswerCache[key] = nieuweWaarden;
+                    } else {
+                        nieuweWaarden.reverse().forEach(val => {
+                            const idx = window.memriseAnswerCache[key].indexOf(val);
+                            if (idx !== -1) window.memriseAnswerCache[key].splice(idx, 1);
+                            window.memriseAnswerCache[key].unshift(val);
+                        });
+                    }
+                });
+
+                statusBox.innerText = "📂 Woordenlijst succesvol ingeladen en bijgewerkt!";
             } catch (err) {
                 statusBox.innerText = "❌ Ongeldig JSON-bestand.";
             }
@@ -363,7 +381,7 @@ function createSmartProbabilityTranslatorGUI() {
         if (autoModusActief) {
             autoBtn.innerText = "🤖 Auto Modus: AAN";
             autoBtn.style.backgroundColor = "#a6e3a1";
-            autoModusInterval = setInterval(voerAnalyseUit, 1500);
+            autoModusInterval = setInterval(voerAnalyseUit, 250);
         } else {
             autoBtn.innerText = "🤖 Auto Modus: UIT";
             autoBtn.style.backgroundColor = "#f38ba8";
