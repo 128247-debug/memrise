@@ -6,6 +6,18 @@
   "merci": [
     "bedankt"
   ],
+  "wie": [
+    "qui",
+    "wie",
+    "wie zijn wij?",
+    "wie unter ziff."
+  ],
+  "qui": [
+    "wie"
+  ],
+  "tot later": [
+    "à plus 2"
+  ],
   "nederlands": [
     "néerlandais(e) 1",
     "néerlandais(e) 4",
@@ -18,6 +30,7 @@
     "Nederlands"
   ],
   "het is, dat is": [
+    "c'est 4",
     "volgende",
     "c'est 1",
     "3\nc'est"
@@ -78,6 +91,9 @@
     "3\nil y a"
   ],
   "c'est": [
+    "het is, dat is 4",
+    "het is, dat is 3",
+    "niet nu",
     "2\nhet is, dat is",
     "1\nhet is, dat is",
     "het is",
@@ -162,9 +178,6 @@
   ],
   "tot morgen": [
     "à demain 1"
-  ],
-  "tot later": [
-    "à plus 2"
   ],
   "ja": [
     "oui 4"
@@ -336,5 +349,115 @@
     "la fille",
     "la fille saute.",
     "le"
+  ],
+  "non": [
+    "à plus 3"
+  ],
+  "wij zijn": [
+    "nous sommes 4"
+  ],
+  "vous êtes": [
+    "nous sommes 4"
+  ],
+  "elles sont": [
+    "zij zijn (vrouwelijk) 2",
+    "zijn",
+    "deze plaal-",
+    "ze zijn"
+  ],
+  "zij zijn (vrouwelijk)": [
+    "elles sont 2",
+    "elles sont 4",
+    "zij zijn (vrouwelijk)"
+  ],
+  "être": [
+    "zijn 1",
+    "zij zijn (vrouwelijk) 2"
+  ],
+  "zijn": [
+    "être 1",
+    "zijn",
+    "[nl] zijn",
+    "verschuldigd zijn ."
+  ],
+  "de vriendin": [
+    "l'amie (f) 3",
+    "la petite amie",
+    "la petite amie de schepers avait mieux compris.",
+    "<g id=\"1\">juge d'instruction</g><g id=\"2\">: est-ce que vous avezfait la connaissance de la copine de ban ?</g>"
+  ],
+  "hoe?": [
+    "comment ? 3",
+    "comment ? 1"
+  ],
+  "ça va bien": [
+    "het gaat goed 1",
+    "comment ? 1"
+  ],
+  "het gaat goed": [
+    "ça va bien 4",
+    "ça va bien 3"
+  ],
+  "de voornaam": [
+    "le prénom 2"
+  ],
+  "l'amie (f)": [
+    "de vriendin 4",
+    "de vriendin 3",
+    "vriend (en) (f)"
+  ],
+  "comment ?": [
+    "hoe? 1",
+    "wat zeg je?",
+    "hoe?"
+  ],
+  "jij woont (wonen)": [
+    "tu habites (habiter) 1",
+    "jij woont (wonen)"
+  ],
+  "le prénom": [
+    "de voornaam 2",
+    "de voornaam 4",
+    "de voornaam",
+    "de voornaam.",
+    "voornaam,"
+  ],
+  "tu habites (habiter)": [
+    "jij woont (wonen) 3",
+    "u woont (live)",
+    "je woont waar?",
+    "ik weet waar je woont."
+  ],
+  "jij heet (heten)": [
+    "tu t'appelles (s'appeler)",
+    "jij heet (heten)"
+  ],
+  "tu t'appelles (s'appeler)": [
+    "jij heet (heten)"
+  ],
+  "ik?": [
+    "moi ?",
+    "ik",
+    "ik klasse:"
+  ],
+  "voorstellen": [
+    "présenter",
+    "voorstellen",
+    "een voedingsplan voorstellen",
+    "dan voorstellen dat ik daarbij kan helpen."
+  ],
+  "présenter": [
+    "voorstellen"
+  ],
+  "leuk": [
+    "chouette",
+    "leuk",
+    "duits – ich mag dich"
+  ],
+  "chouette": [
+    "leuk"
+  ],
+  "moi ?": [
+    "ik?"
   ]
 }
