@@ -1,0 +1,340 @@
+{
+  "bedankt": [
+    "merci 3",
+    "merci"
+  ],
+  "merci": [
+    "bedankt"
+  ],
+  "nederlands": [
+    "néerlandais(e) 1",
+    "néerlandais(e) 4",
+    "2\nnéerlandais(e)"
+  ],
+  "néerlandais(e)": [
+    "3\nnederlands",
+    "nederlands",
+    "(Nederlands)",
+    "Nederlands"
+  ],
+  "het is, dat is": [
+    "volgende",
+    "c'est 1",
+    "3\nc'est"
+  ],
+  "het museum": [
+    "le musée 3",
+    "si le musée",
+    "<g id=\"74\">le musée</g>",
+    "le musée dr."
+  ],
+  "si le musée": [
+    "het museum"
+  ],
+  "le musée": [
+    "het museum 2",
+    "<g id=\"74\">het museum</g>",
+    "het museum"
+  ],
+  "ook": [
+    "aussi 3",
+    "brainfuck",
+    "ook",
+    "ik heb niet buurman"
+  ],
+  "brainfuck": [
+    "ook"
+  ],
+  "aussi": [
+    "ook 4",
+    "ook 1",
+    "tevens",
+    "ook"
+  ],
+  "in": [
+    "dans 1"
+  ],
+  "frans": [
+    "français(e) 2",
+    "2\nfrançais(e)"
+  ],
+  "mevrouw": [
+    "madame 4",
+    "4\nmadame"
+  ],
+  "meneer": [
+    "monsieur 1",
+    "3\nmonsieur"
+  ],
+  "madame": [
+    "4\nmevrouw"
+  ],
+  "waar?": [
+    "où ? 1",
+    "1\noù ?"
+  ],
+  "er is, er zijn": [
+    "il y a 1",
+    "3\nil y a"
+  ],
+  "c'est": [
+    "2\nhet is, dat is",
+    "1\nhet is, dat is",
+    "het is",
+    "Dat is nu bereikt.",
+    "Dat is alles."
+  ],
+  "français(e)": [
+    "3\nfrans"
+  ],
+  "où ?": [
+    "1\nwaar?",
+    "Waar?",
+    "waarbij:"
+  ],
+  "la rue": [
+    "de straat 1",
+    "de straat 3",
+    "niet nu"
+  ],
+  "de stad": [
+    "la ville 1",
+    "la ville 4"
+  ],
+  "de straat": [
+    "la rue 1"
+  ],
+  "de hobby, passie": [
+    "la passion 4",
+    "la rue 1",
+    "le passe-temps, la passion",
+    "(18 000 aujourd’hui), mais ceux-ci continuent d’organiser des concours,",
+    "du 14 au 17 mars, vous trouverez ava chez creativa, le salon du diy et des loisirs créatifs à bruxelles."
+  ],
+  "de inwoner": [
+    "l'habitant (m) 2",
+    "le résident",
+    "vers ses habitants"
+  ],
+  "l'habitant (m)": [
+    "volgende"
+  ],
+  "dans": [
+    "in 4",
+    "in 3"
+  ],
+  "dag": [
+    "bonjour 3",
+    "jour",
+    "salut"
+  ],
+  "goedenavond": [
+    "bonsoir 3",
+    "bonsoir 2"
+  ],
+  "tot gauw": [
+    "à bientôt 4",
+    "à plus 1"
+  ],
+  "tot ziens": [
+    "au revoir 2"
+  ],
+  "de school": [
+    "l'école (f) 1",
+    "l'école (f) 2"
+  ],
+  "ik heet (heten)": [
+    "je m'appelle (s'appeler) 2",
+    "je m'appelle (s'appeler) 1"
+  ],
+  "de wijk": [
+    "le quartier 1",
+    "le quartier 3"
+  ],
+  "ik woon (wonen)": [
+    "j'habite (habiter) 4"
+  ],
+  "niet slecht": [
+    "pas mal 2"
+  ],
+  "hoe gaat het?": [
+    "ça va ? 2"
+  ],
+  "tot morgen": [
+    "à demain 1"
+  ],
+  "tot later": [
+    "à plus 2"
+  ],
+  "ja": [
+    "oui 4"
+  ],
+  "de jongen": [
+    "le garçon",
+    "le garçon saute.",
+    "c'est le garçon."
+  ],
+  "daar is, daar zijn": [
+    "voilà",
+    "il y a 3",
+    "daar is, daar zijn",
+    "is , wordt vermoed daar zijn hoofdverblijfplaats te hebben ;"
+  ],
+  "hoi": [
+    "salut 3"
+  ],
+  "het land": [
+    "le pays 3",
+    "le quartier 1"
+  ],
+  "de vriend": [
+    "l'ami (m) 3",
+    "l'ami",
+    "l'ami de tous les enfants ........",
+    "le copain a yoan était bourrée"
+  ],
+  "en jij?": [
+    "et toi ? 3",
+    "in jij?",
+    "meer weten?"
+  ],
+  "frankrijk": [
+    "la france 3",
+    "frankrijk",
+    "france"
+  ],
+  "l'ami (m)": [
+    "de vriend 2",
+    "vriend (m)"
+  ],
+  "la france": [
+    "frankrijk 2",
+    "frankrijk 3",
+    "n/491/c/95 - oostenrijk",
+    "frankri ik",
+    "frankrijk"
+  ],
+  "de klas": [
+    "la classe 4",
+    "la classe",
+    "° la classe; 1",
+    "niveau de la classe"
+  ],
+  "groot": [
+    "grand 1",
+    "tegenovergesteld",
+    "groot",
+    "de groot,"
+  ],
+  "grand": [
+    "groot",
+    "grote"
+  ],
+  "ik ben": [
+    "je suis 2",
+    "ik ben",
+    "ben"
+  ],
+  "jij bent": [
+    "tu es 1",
+    "jij bent",
+    "jij",
+    "bent"
+  ],
+  "hij is/is hij": [
+    "il est 3",
+    "hij is/is hij",
+    "intermediate system-to-intermediate system"
+  ],
+  "zij is/is zij": [
+    "elle est 1",
+    "zij is/is zij",
+    "intermediate system-to-intermediate system"
+  ],
+  "je suis": [
+    "ik ben 2",
+    "ik ben 1",
+    "ik ben",
+    "ik ben er zeker van dat dat de juiste weg is.",
+    "ik ben ...."
+  ],
+  "on est": [
+    "wij zijn",
+    "we zijn met 10!!!",
+    "we zijn aangekomen."
+  ],
+  "il est": [
+    "hij is/is hij 4",
+    "hij is/is hij 3",
+    "het toestel",
+    "het beeld",
+    "met"
+  ],
+  "men is/we zijn": [
+    "on est 3",
+    "men is/we zijn",
+    "we zijn een half uur verwijderd van valladolid."
+  ],
+  "elle est": [
+    "zij is/is zij 4",
+    "tegenwoordig",
+    "zij is:",
+    "daar is hij!"
+  ],
+  "tu es": [
+    "jij bent 2",
+    "je bent",
+    "weet je het zeker?",
+    "je bent een"
+  ],
+  "ik ben dol op (dol zijn op)": [
+    "j'adore",
+    "ik ben dol op (dol zijn op)"
+  ],
+  "j'adore": [
+    "ik ben dol op (dol zijn op)"
+  ],
+  "mooi, leuk": [
+    "joli",
+    "mooi, leuk"
+  ],
+  "joli": [
+    "mooi, leuk"
+  ],
+  "de middelbare school (klas 1, 2, 3)": [
+    "le collège",
+    "lycée (ce1, ce2, ce3)"
+  ],
+  "lycée (ce1, ce2, ce3)": [
+    "de middelbare school (klas 1, 2, 3)"
+  ],
+  "le collège": [
+    "de middelbare school (klas 1, 2, 3)"
+  ],
+  "voilà": [
+    "daar is, daar zijn"
+  ],
+  "hier is, hier zijn": [
+    "voici",
+    "gisteren is, gisteren zijn"
+  ],
+  "gisteren is, gisteren zijn": [
+    "hier is, hier zijn"
+  ],
+  "voici": [
+    "hier is, hier zijn"
+  ],
+  "à plus": [
+    "tot dan!",
+    "naar meer"
+  ],
+  "nee": [
+    "niet nu",
+    "non"
+  ],
+  "het meisje": [
+    "la fille",
+    "la fille saute.",
+    "le"
+  ]
+}
