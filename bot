@@ -1,4 +1,4 @@
-(function createSmartProbabilityTranslatorGUI() {
+function createSmartProbabilityTranslatorGUI() {
     const existingGui = document.getElementById('memrise-smart-gui');
     if (existingGui) existingGui.remove();
 
@@ -48,9 +48,7 @@
         if (!tekst) return '';
         const match = tekst.trim().match(/^([\d\s.\-)]+)\s*(.+)$/);
         if (match) {
-            const nummer = match[1].trim();
-            const hetWoord = match[2].trim();
-            return `${hetWoord} ${nummer}`.toLowerCase();
+            return `${match[2].trim()} ${match[1].trim()}`.toLowerCase();
         }
         return tekst.trim().toLowerCase();
     }
@@ -70,18 +68,19 @@
         return match ? match[1] : null;
     }
 
+    function verstuurEnterToets(doelElement) {
+        const target = doelElement || document.activeElement || document;
+        const opts = { key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true, cancelable: true };
+        target.dispatchEvent(new KeyboardEvent('keydown', opts));
+        target.dispatchEvent(new KeyboardEvent('keypress', opts));
+        target.dispatchEvent(new KeyboardEvent('keyup', opts));
+    }
+
     function verstuurToetsDruk(nummerChar) {
         const keyCode = 48 + parseInt(nummerChar, 10);
-        const events = ['keydown', 'keypress', 'keyup'];
-        
-        events.forEach(eventType => {
+        ['keydown', 'keypress', 'keyup'].forEach(eventType => {
             document.dispatchEvent(new KeyboardEvent(eventType, {
-                key: nummerChar,
-                code: `Digit${nummerChar}`,
-                keyCode: keyCode,
-                which: keyCode,
-                bubbles: true,
-                cancelable: true
+                key: nummerChar, code: `Digit${nummerChar}`, keyCode: keyCode, which: keyCode, bubbles: true, cancelable: true
             }));
         });
     }
@@ -89,22 +88,54 @@
     function slaOpInGeheugen(vraagTekst, antwoordTekst) {
         const v = verplaatsNummerNaarAchter(vraagTekst);
         const a = verplaatsNummerNaarAchter(antwoordTekst);
-
         if (!v || !a) return;
 
-        if (!window.memriseAnswerCache[v]) {
-            window.memriseAnswerCache[v] = [];
-        }
-        if (!window.memriseAnswerCache[v].includes(a)) {
-            window.memriseAnswerCache[v].unshift(a);
+        window.memriseAnswerCache[v] = window.memriseAnswerCache[v] || [];
+        if (!window.memriseAnswerCache[v].includes(a)) window.memriseAnswerCache[v].unshift(a);
+
+        window.memriseAnswerCache[a] = window.memriseAnswerCache[a] || [];
+        if (!window.memriseAnswerCache[a].includes(v)) window.memriseAnswerCache[a].unshift(v);
+    }
+
+    function klikVolgendeKnopOfEnter() {
+        let volgendeKnop = document.querySelector('button[data-testid*="next"], button[data-testid*="continue"]');
+        
+        if (!volgendeKnop) {
+            volgendeKnop = Array.from(document.querySelectorAll('button, a, div[role="button"]')).find(el => {
+                const tekst = el.innerText ? el.innerText.toLowerCase().trim() : '';
+                return tekst.includes('volgende') || tekst.includes('next') || tekst.includes('continue');
+            });
         }
 
-        if (!window.memriseAnswerCache[a]) {
-            window.memriseAnswerCache[a] = [];
+        if (volgendeKnop) {
+            volgendeKnop.click();
+        } else {
+            verstuurEnterToets();
         }
-        if (!window.memriseAnswerCache[a].includes(v)) {
-            window.memriseAnswerCache[a].unshift(v);
+    }
+
+    function controleerEnSlaFoutPaginaOp() {
+        const alleTeksten = Array.from(document.querySelectorAll('*'))
+            .filter(el => el.children.length === 0 && el.innerText && el.innerText.trim().length > 0);
+
+        const isFoutScherm = alleTeksten.some(el => /jouw antwoord|your answer/i.test(el.innerText));
+
+        if (isFoutScherm) {
+            let frTekst = '', nlTekst = '';
+            for (let i = 0; i < alleTeksten.length; i++) {
+                const t = alleTeksten[i].innerText.trim();
+                if (/^french$/i.test(t) && i + 1 < alleTeksten.length) frTekst = alleTeksten[i + 1].innerText.trim();
+                if (/^dutch$/i.test(t) && i + 1 < alleTeksten.length) nlTekst = alleTeksten[i + 1].innerText.trim();
+            }
+
+            if (frTekst && nlTekst) {
+                slaOpInGeheugen(frTekst, nlTekst);
+                statusBox.innerHTML = `⚠️ <b>Fout opgeslagen in geheugen:</b><br>${frTekst} = ${nlTekst}`;
+                klikVolgendeKnopOfEnter();
+                return true;
+            }
         }
+        return false;
     }
 
     function controleerEnSlaLeerpaginaOp() {
@@ -113,10 +144,10 @@
 
         if (hoofdelement && subelement && hoofdelement.innerText && subelement.innerText) {
             slaOpInGeheugen(hoofdelement.innerText, subelement.innerText);
-            statusBox.innerHTML = `🧠 <b>Automatisch geleerd:</b><br>${hoofdelement.innerText} = ${subelement.innerText}`;
+            statusBox.innerHTML = `🧠 <b>Geleerd:</b><br>${hoofdelement.innerText} = ${subelement.innerText}`;
+            klikVolgendeKnopOfEnter();
             return true;
         }
-
         return false;
     }
 
@@ -135,11 +166,7 @@
         for (let i = 1; i <= a.length; i++) {
             for (let j = 1; j <= b.length; j++) {
                 const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-                matrix[i][j] = Math.min(
-                    matrix[i - 1][j] + 1,
-                    matrix[i][j - 1] + 1,
-                    matrix[i - 1][j - 1] + cost
-                );
+                matrix[i][j] = Math.min(matrix[i - 1][j] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j - 1] + cost);
             }
         }
         return matrix[a.length][b.length];
@@ -149,66 +176,39 @@
         const str1 = verplaatsNummerNaarAchter(s1);
         const str2 = verplaatsNummerNaarAchter(s2);
         if (str1 === str2) return 100;
-        
         const maxLen = Math.max(str1.length, str2.length);
         if (maxLen === 0) return 100;
-        
-        const distance = berekenLevenshteinAfstand(str1, str2);
-        return ((maxLen - distance) / maxLen) * 100;
+        return ((maxLen - berekenLevenshteinAfstand(str1, str2)) / maxLen) * 100;
     }
 
     function isWaarschijnlijkNederlands(tekst) {
         const nlWoorden = ['de', 'het', 'een', 'van', 'tot', 'later', 'hoe', 'gaat', 'met', 'jou', 'ja', 'nee', 'dag', 'hallo', 'hoi', 'dank', 'wel', 'bedankt'];
-        const woorden = tekst.toLowerCase().split(/\s+/);
-        return woorden.some(w => nlWoorden.includes(w));
+        return tekst.toLowerCase().split(/\s+/).some(w => nlWoorden.includes(w));
     }
 
-    function verwijderGhostOverlay() {
-        const bestaandeOverlay = document.getElementById('memrise-ghost-overlay');
-        if (bestaandeOverlay) bestaandeOverlay.remove();
-    }
-
-    function vulInputIn(inputElement, tekst) {
+    async function vulInputIn(inputElement, tekst) {
         inputElement.focus();
-        
         const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-        if (nativeInputValueSetter) {
-            nativeInputValueSetter.call(inputElement, tekst);
-        } else {
-            inputElement.value = tekst;
-        }
+        if (nativeInputValueSetter) nativeInputValueSetter.call(inputElement, tekst);
+        else inputElement.value = tekst;
 
         inputElement.dispatchEvent(new Event('input', { bubbles: true }));
         inputElement.dispatchEvent(new Event('change', { bubbles: true }));
 
-        const enterEvents = ['keydown', 'keypress', 'keyup'];
-        enterEvents.forEach(eventType => {
-            inputElement.dispatchEvent(new KeyboardEvent(eventType, {
-                key: 'Enter',
-                code: 'Enter',
-                keyCode: 13,
-                which: 13,
-                bubbles: true,
-                cancelable: true
-            }));
-        });
+        await new Promise(r => setTimeout(r, 150));
+        klikVolgendeKnopOfEnter();
     }
 
     async function verwerkTappingOpdracht(doelTekst) {
-        const schoneDoelTekst = verwijderNummersSchoon(doelTekst);
-        const verwachteWoorden = schoneDoelTekst.split(/\s+/).filter(w => w.length > 0);
-
+        const verwachteWoorden = verwijderNummersSchoon(doelTekst).split(/\s+/).filter(w => w.length > 0);
         statusBox.innerHTML = `🧩 <b>Woorden klikken:</b><br><i>${verwachteWoorden.join(' ')}</i>`;
 
         for (const woord of verwachteWoorden) {
             const knoppen = Array.from(document.querySelectorAll('button'));
-            
-            let besteKnop = null;
-            let besteScore = 0;
+            let besteKnop = null, besteScore = 0;
 
             knoppen.forEach(knop => {
                 if (knop.closest('#memrise-smart-gui')) return;
-                
                 const knopTekst = verwijderNummersSchoon(knop.innerText);
                 if (!knopTekst) return;
 
@@ -226,14 +226,7 @@
         }
 
         await new Promise(r => setTimeout(r, 200));
-        
-        const submitBtn = document.querySelector('button[data-testid*="check"], button[data-testid*="next"], button[type="submit"]');
-        if (submitBtn) {
-            submitBtn.click();
-        } else {
-            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', keyCode: 13, bubbles: true }));
-        }
-
+        klikVolgendeKnopOfEnter();
         statusBox.innerHTML = `✅ <b>Woorden ingeklikt & verzonden!</b>`;
     }
 
@@ -248,19 +241,15 @@
         statusBox.innerText = "💾 Woordenlijst geëxporteerd!";
     });
 
-    document.getElementById('import-cache-btn').addEventListener('click', () => {
-        document.getElementById('import-file-input').click();
-    });
+    document.getElementById('import-cache-btn').addEventListener('click', () => document.getElementById('import-file-input').click());
 
     document.getElementById('import-file-input').addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (!file) return;
-
         const reader = new FileReader();
         reader.onload = (event) => {
             try {
-                const importedData = JSON.parse(event.target.result);
-                window.memriseAnswerCache = { ...window.memriseAnswerCache, ...importedData };
+                window.memriseAnswerCache = { ...window.memriseAnswerCache, ...JSON.parse(event.target.result) };
                 statusBox.innerText = "📂 Woordenlijst succesvol ingeladen!";
             } catch (err) {
                 statusBox.innerText = "❌ Ongeldig JSON-bestand.";
@@ -271,16 +260,10 @@
 
     document.getElementById('learn-correct-btn').addEventListener('click', () => {
         const targetElement = document.querySelector('span[dir="auto"], div[dir="auto"], [dir="auto"]');
-        if (!targetElement || !targetElement.innerText.trim()) {
-            statusBox.innerText = "❌ Geen vraag op scherm gevonden.";
+        if (!targetElement || !targetElement.innerText.trim() || !laatstGeselecteerdeElement || !laatstGeselecteerdeElement.innerText.trim()) {
+            statusBox.innerText = "❌ Selecteer eerst een antwoord op het scherm.";
             return;
         }
-
-        if (!laatstGeselecteerdeElement || !laatstGeselecteerdeElement.innerText.trim()) {
-            statusBox.innerText = "❌ Klik eerst op het juiste antwoord op het scherm.";
-            return;
-        }
-
         slaOpInGeheugen(targetElement.innerText, laatstGeselecteerdeElement.innerText);
         statusBox.innerHTML = `✅ <b>Opgeslagen!</b><br>Vraag: <i>${targetElement.innerText}</i><br>Antwoord: <b>${laatstGeselecteerdeElement.innerText}</b>`;
     });
@@ -290,19 +273,11 @@
         isVerwerkenBezig = true;
 
         try {
-            verwijderGhostOverlay();
-
-            if (controleerEnSlaLeerpaginaOp()) {
-                const volgendeKnop = document.querySelector('button[data-testid*="next"], button[data-testid*="continue"]');
-                if (volgendeKnop) volgendeKnop.click();
-                isVerwerkenBezig = false;
-                return;
-            }
+            if (controleerEnSlaFoutPaginaOp() || controleerEnSlaLeerpaginaOp()) return;
 
             const targetElement = document.querySelector('span[dir="auto"], div[dir="auto"], [dir="auto"]');
             if (!targetElement || !targetElement.innerText.trim()) {
                 statusBox.innerText = "❌ Geen vraagtekst gevonden.";
-                isVerwerkenBezig = false;
                 return;
             }
 
@@ -315,20 +290,13 @@
             } else {
                 let vanTaal = isWaarschijnlijkNederlands(teVertalenTekst) ? 'nl' : 'fr';
                 let naarTaal = (vanTaal === 'nl') ? 'fr' : 'nl';
-
                 statusBox.innerText = `🔍 Ophalen vertalingen...`;
 
                 try {
                     const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(teVertalenTekst)}&langpair=${vanTaal}|${naarTaal}`);
                     const data = await res.json();
-                    
-                    if (data.responseData && data.responseData.translatedText) {
-                        mogelijkeVertalingen.add(verplaatsNummerNaarAchter(data.responseData.translatedText));
-                    }
-                    if (data.matches && Array.isArray(data.matches)) {
-                        data.matches.forEach(m => { if (m.translation) mogelijkeVertalingen.add(verplaatsNummerNaarAchter(m.translation)); });
-                    }
-
+                    if (data.responseData?.translatedText) mogelijkeVertalingen.add(verplaatsNummerNaarAchter(data.responseData.translatedText));
+                    if (Array.isArray(data.matches)) data.matches.forEach(m => { if (m.translation) mogelijkeVertalingen.add(verplaatsNummerNaarAchter(m.translation)); });
                     window.memriseAnswerCache[teVertalenTekst] = Array.from(mogelijkeVertalingen);
                 } catch (error) {
                     console.error(error);
@@ -338,36 +306,27 @@
             const vertalingenLijst = Array.from(mogelijkeVertalingen);
             const besteVertaling = vertalingenLijst[0] || "";
 
-            // 1. Tapping-opdrachten
-            const isTappingOpdracht = document.querySelector('button[data-testid="tapping-response-clear"]');
-            if (isTappingOpdracht) {
+            if (document.querySelector('button[data-testid="tapping-response-clear"]')) {
                 await verwerkTappingOpdracht(besteVertaling);
-                isVerwerkenBezig = false;
                 return;
             }
 
-            // 2. Type-opdrachten
             const inputField = document.querySelector('input[type="text"], textarea');
             if (inputField) {
                 const schoneTekst = verwijderNummersSchoon(besteVertaling);
-                vulInputIn(inputField, schoneTekst);
-                statusBox.innerHTML = `✍️ <b>Antwoord ingevuld & Enter:</b><br><b>${schoneTekst}</b>`;
-                isVerwerkenBezig = false;
+                await vulInputIn(inputField, schoneTekst);
+                statusBox.innerHTML = `✍️ <b>Antwoord ingevuld & verzonden:</b><br><b>${schoneTekst}</b>`;
                 return;
             }
 
-            // 3. Multiple Choice-opdrachten
             const schermOpties = Array.from(document.querySelectorAll('button, [data-testid*="option"], .sc-1vg77x4-0'));
-            const negeerTeksten = ['ik weet het niet', 'weet ik niet', 'geen idee', "don't know", 'i dont know', "i don't know"];
-
+            const negeerTeksten = ['ik weet het niet', 'weet ik niet', 'geen idee', "don't know", 'i dont know'];
             let geanalyseerdeOpties = [];
 
             schermOpties.forEach((optie, index) => {
                 if (optie.closest('#memrise-smart-gui') || optie === targetElement) return;
-
                 const knopTekst = verplaatsNummerNaarAchter(optie.innerText);
-                if (!knopTekst || knopTekst.length > 80) return;
-                if (negeerTeksten.some(ongewenst => knopTekst.includes(ongewenst))) return;
+                if (!knopTekst || knopTekst.length > 80 || negeerTeksten.some(ongewenst => knopTekst.includes(ongewenst))) return;
 
                 let hoogsteKnopScore = 0;
                 vertalingenLijst.forEach(vertaling => {
@@ -375,37 +334,19 @@
                     if (score > hoogsteKnopScore) hoogsteKnopScore = score;
                 });
 
-                // Haal het nummer op (of bepaal op basis van de positie in de lijst 1 t/m 4)
-                const gevondenNummer = haalNummerOpUitOptie(optie.innerText) || (index + 1).toString();
-
                 geanalyseerdeOpties.push({
                     element: optie,
                     tekst: knopTekst,
                     score: hoogsteKnopScore,
-                    nummer: gevondenNummer
+                    nummer: haalNummerOpUitOptie(optie.innerText) || (index + 1).toString()
                 });
             });
 
             geanalyseerdeOpties.sort((a, b) => b.score - a.score);
 
-            document.querySelectorAll('.memrise-matched-option').forEach(el => {
-                el.style.border = '';
-                el.style.backgroundColor = '';
-            });
-
             if (geanalyseerdeOpties.length > 0) {
                 const besteMatch = geanalyseerdeOpties[0];
-                besteMatch.element.classList.add('memrise-matched-option');
-                besteMatch.element.style.border = '3px solid #a6e3a1';
-                besteMatch.element.style.backgroundColor = '#2e4235';
-
-                // Simuleer de toetsaanslag van het nummer als dit aanwezig is
-                if (besteMatch.nummer) {
-                    verstuurToetsDruk(besteMatch.nummer);
-                    statusBox.innerHTML = `🔢 <b>Toets '${besteMatch.nummer}' ingedrukt voor match (${Math.round(besteMatch.score)}% zeker):</b><br><b>${besteMatch.tekst}</b>`;
-                }
-                
-                // Klik ook op het element ter beveiliging
+                if (besteMatch.nummer) verstuurToetsDruk(besteMatch.nummer);
                 besteMatch.element.click();
             } else {
                 statusBox.innerHTML = `💡 Geen geschikte opties gevonden.`;
@@ -422,14 +363,13 @@
         if (autoModusActief) {
             autoBtn.innerText = "🤖 Auto Modus: AAN";
             autoBtn.style.backgroundColor = "#a6e3a1";
-            
-            autoModusInterval = setInterval(() => {
-                voerAnalyseUit();
-            }, 1500);
+            autoModusInterval = setInterval(voerAnalyseUit, 1500);
         } else {
             autoBtn.innerText = "🤖 Auto Modus: UIT";
             autoBtn.style.backgroundColor = "#f38ba8";
             clearInterval(autoModusInterval);
         }
     });
-})();
+}
+
+createSmartProbabilityTranslatorGUI();
