@@ -2,13 +2,18 @@
     const existingGui = document.getElementById('memrise-smart-gui');
     if (existingGui) existingGui.remove();
 
+    // Geheugen voor opgeslagen antwoorden
     window.memriseAnswerCache = window.memriseAnswerCache || {
         'bedankt': ['merci'],
         'merci': ['bedankt']
     };
 
     let laatstGeselecteerdeElement = null;
+    let autoModusActief = false;
+    let autoModusInterval = null;
+    let isVerwerkenBezig = false;
 
+    // Interface (GUI) opbouwen
     const gui = document.createElement('div');
     gui.id = 'memrise-smart-gui';
     gui.style.position = 'fixed';
@@ -25,6 +30,7 @@
 
     gui.innerHTML = `
         <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #89b4fa;">🎯 Ultimate Learning Engine</h4>
+        <button id="toggle-auto-btn" style="width: 100%; padding: 10px; background-color: #f38ba8; border: none; border-radius: 5px; color: #11111b; font-weight: bold; cursor: pointer; margin-bottom: 6px;">🤖 Auto Modus: UIT</button>
         <button id="auto-translate-btn" style="width: 100%; padding: 10px; background-color: #a6e3a1; border: none; border-radius: 5px; color: #11111b; font-weight: bold; cursor: pointer; margin-bottom: 6px;">Analyseer & Klik / Hint</button>
         <button id="learn-correct-btn" style="width: 100%; padding: 6px; background-color: #f9e2af; border: none; border-radius: 5px; color: #11111b; font-weight: bold; cursor: pointer; margin-bottom: 6px;">📌 Onthoud Antwoord</button>
         <div style="display: flex; gap: 5px;">
@@ -38,8 +44,9 @@
     document.body.appendChild(gui);
 
     const statusBox = document.getElementById('status-box');
+    const autoBtn = document.getElementById('toggle-auto-btn');
 
-    // Verplaatst nummers van de voorkant naar de achterkant (bijv. "1. Merci" -> "merci 1.")
+    // Hulpfuncties voor tekstbewerking
     function verplaatsNummerNaarAchter(tekst) {
         if (!tekst) return '';
         const match = tekst.trim().match(/^([\d\s.\-)]+)\s*(.+)$/);
@@ -51,7 +58,12 @@
         return tekst.trim().toLowerCase();
     }
 
-    // Opvangen van handmatige selects
+    function verwijderNummersSchoon(tekst) {
+        if (!tekst) return '';
+        return tekst.replace(/^[\d\s.\-)]+/, '').replace(/[\d\s.\-)]+$/, '').trim().toLowerCase();
+    }
+
+    // Registreer laatst geklikte element
     document.addEventListener('click', (e) => {
         const knop = e.target.closest('button, [data-testid*="option"], .sc-1vg77x4-0');
         if (knop && !knop.closest('#memrise-smart-gui')) {
@@ -59,6 +71,7 @@
         }
     }, true);
 
+    // Overeenkomst berekenen (Levenshtein Distance)
     function berekenLevenshteinAfstand(a, b) {
         const matrix = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
         for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
@@ -103,7 +116,7 @@
     function toonGhostTekst(inputElement, tekst) {
         verwijderGhostOverlay();
 
-        const teTonenTekst = verplaatsNummerNaarAchter(tekst);
+        const teTonenTekst = verwijderNummersSchoon(tekst);
         const rect = inputElement.getBoundingClientRect();
         const overlay = document.createElement('div');
         overlay.id = 'memrise-ghost-overlay';
@@ -118,11 +131,37 @@
         overlay.style.zIndex = '99999';
 
         document.body.appendChild(overlay);
-
         inputElement.addEventListener('input', verwijderGhostOverlay, { once: true });
     }
 
-    // Export functie
+    // Antwoord automatisch invoeren bij type-vragen
+    function vulInputIn(inputElement, tekst) {
+        inputElement.focus();
+        
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        if (nativeInputValueSetter) {
+            nativeInputValueSetter.call(inputElement, tekst);
+        } else {
+            inputElement.value = tekst;
+        }
+
+        inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+        inputElement.dispatchEvent(new Event('change', { bubbles: true }));
+
+        const enterEvents = ['keydown', 'keypress', 'keyup'];
+        enterEvents.forEach(eventType => {
+            inputElement.dispatchEvent(new KeyboardEvent(eventType, {
+                key: 'Enter',
+                code: 'Enter',
+                keyCode: 13,
+                which: 13,
+                bubbles: true,
+                cancelable: true
+            }));
+        });
+    }
+
+    // Export / Import Geheugendata
     document.getElementById('export-cache-btn').addEventListener('click', () => {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(window.memriseAnswerCache, null, 2));
         const downloadAnchor = document.createElement('a');
@@ -134,7 +173,6 @@
         statusBox.innerText = "💾 Woordenlijst geëxporteerd!";
     });
 
-    // Import functie
     document.getElementById('import-cache-btn').addEventListener('click', () => {
         document.getElementById('import-file-input').click();
     });
@@ -156,7 +194,7 @@
         reader.readAsText(file);
     });
 
-    // Handmatig antwoord onthouden
+    // Knop: Onthoud Antwoord
     document.getElementById('learn-correct-btn').addEventListener('click', () => {
         const targetElement = document.querySelector('span[dir="auto"], div[dir="auto"], [dir="auto"]');
         if (!targetElement || !targetElement.innerText.trim()) {
@@ -183,107 +221,134 @@
         statusBox.innerHTML = `✅ <b>Opgeslagen!</b><br>Vraag: <i>${vraag}</i><br>Antwoord: <b>${correctAntwoord}</b>`;
     });
 
-    // Hoofd-analyse
-    document.getElementById('auto-translate-btn').addEventListener('click', async () => {
-        verwijderGhostOverlay();
+    // Kernfunctie: Analyse en Invoering / Klikken
+    async function voerAnalyseUit() {
+        if (isVerwerkenBezig) return;
+        isVerwerkenBezig = true;
 
-        const targetElement = document.querySelector('span[dir="auto"], div[dir="auto"], [dir="auto"]');
-        if (!targetElement || !targetElement.innerText.trim()) {
-            statusBox.innerText = "❌ Geen vraagtekst gevonden.";
-            return;
-        }
+        try {
+            verwijderGhostOverlay();
 
-        const teVertalenTekst = verplaatsNummerNaarAchter(targetElement.innerText);
-        let mogelijkeVertalingen = new Set();
-
-        if (window.memriseAnswerCache[teVertalenTekst]) {
-            window.memriseAnswerCache[teVertalenTekst].forEach(v => mogelijkeVertalingen.add(verplaatsNummerNaarAchter(v)));
-            statusBox.innerText = `⚡ Uit geheugen geladen...`;
-        } else {
-            let vanTaal = isWaarschijnlijkNederlands(teVertalenTekst) ? 'nl' : 'fr';
-            let naarTaal = (vanTaal === 'nl') ? 'fr' : 'nl';
-
-            statusBox.innerText = `🔍 Ophalen vertalingen...`;
-
-            try {
-                const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(teVertalenTekst)}&langpair=${vanTaal}|${naarTaal}`);
-                const data = await res.json();
-                
-                if (data.responseData && data.responseData.translatedText) {
-                    mogelijkeVertalingen.add(verplaatsNummerNaarAchter(data.responseData.translatedText));
-                }
-                if (data.matches && Array.isArray(data.matches)) {
-                    data.matches.forEach(m => { if (m.translation) mogelijkeVertalingen.add(verplaatsNummerNaarAchter(m.translation)); });
-                }
-
-                window.memriseAnswerCache[teVertalenTekst] = Array.from(mogelijkeVertalingen);
-            } catch (error) {
-                console.error(error);
+            const targetElement = document.querySelector('span[dir="auto"], div[dir="auto"], [dir="auto"]');
+            if (!targetElement || !targetElement.innerText.trim()) {
+                statusBox.innerText = "❌ Geen vraagtekst gevonden.";
+                isVerwerkenBezig = false;
+                return;
             }
-        }
 
-        const vertalingenLijst = Array.from(mogelijkeVertalingen);
-        const besteVertaling = verplaatsNummerNaarAchter(vertalingenLijst[0] || "");
+            const teVertalenTekst = verplaatsNummerNaarAchter(targetElement.innerText);
+            let mogelijkeVertalingen = new Set();
 
-        // Check op type-opdracht (input-veld)
-        const inputField = document.querySelector('input[type="text"], textarea');
+            if (window.memriseAnswerCache[teVertalenTekst]) {
+                window.memriseAnswerCache[teVertalenTekst].forEach(v => mogelijkeVertalingen.add(verplaatsNummerNaarAchter(v)));
+                statusBox.innerText = `⚡ Uit geheugen geladen...`;
+            } else {
+                let vanTaal = isWaarschijnlijkNederlands(teVertalenTekst) ? 'nl' : 'fr';
+                let naarTaal = (vanTaal === 'nl') ? 'fr' : 'nl';
 
-        if (inputField) {
-            try {
-                inputField.focus();
-                inputField.value = besteVertaling;
-                inputField.dispatchEvent(new Event('input', { bubbles: true }));
-                statusBox.innerHTML = `✍️ <b>Antwoord ingevuld:</b><br><b>${besteVertaling}</b>`;
-            } catch (e) {
-                toonGhostTekst(inputField, besteVertaling);
-                statusBox.innerHTML = `👻 <b>Ghost-tekst getoond:</b><br><b>${besteVertaling}</b>`;
+                statusBox.innerText = `🔍 Ophalen vertalingen...`;
+
+                try {
+                    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(teVertalenTekst)}&langpair=${vanTaal}|${naarTaal}`);
+                    const data = await res.json();
+                    
+                    if (data.responseData && data.responseData.translatedText) {
+                        mogelijkeVertalingen.add(verplaatsNummerNaarAchter(data.responseData.translatedText));
+                    }
+                    if (data.matches && Array.isArray(data.matches)) {
+                        data.matches.forEach(m => { if (m.translation) mogelijkeVertalingen.add(verplaatsNummerNaarAchter(m.translation)); });
+                    }
+
+                    window.memriseAnswerCache[teVertalenTekst] = Array.from(mogelijkeVertalingen);
+                } catch (error) {
+                    console.error(error);
+                }
             }
-            return;
-        }
 
-        // Meerkeuze afhandeling
-        const schermOpties = Array.from(document.querySelectorAll('button, [data-testid*="option"], .sc-1vg77x4-0'));
-        const negeerTeksten = ['ik weet het niet', 'weet ik niet', 'geen idee', "don't know", 'i dont know', "i don't know"];
+            const vertalingenLijst = Array.from(mogelijkeVertalingen);
+            const besteVertaling = vertalingenLijst[0] || "";
 
-        let geanalyseerdeOpties = [];
+            const inputField = document.querySelector('input[type="text"], textarea');
 
-        schermOpties.forEach(optie => {
-            if (optie.closest('#memrise-smart-gui') || optie === targetElement) return;
+            // Afhandeling van TYPE-vragen
+            if (inputField) {
+                const schoneTekst = verwijderNummersSchoon(besteVertaling);
+                try {
+                    vulInputIn(inputField, schoneTekst);
+                    statusBox.innerHTML = `✍️ <b>Antwoord ingevuld & Enter:</b><br><b>${schoneTekst}</b>`;
+                } catch (e) {
+                    toonGhostTekst(inputField, schoneTekst);
+                    statusBox.innerHTML = `👻 <b>Ghost-tekst getoond:</b><br><b>${schoneTekst}</b>`;
+                }
+                isVerwerkenBezig = false;
+                return;
+            }
 
-            const knopTekst = verplaatsNummerNaarAchter(optie.innerText);
-            if (!knopTekst || knopTekst.length > 80) return;
-            if (negeerTeksten.some(ongewenst => knopTekst.includes(ongewenst))) return;
+            // Afhandeling van MULTIPLE CHOICE-vragen
+            const schermOpties = Array.from(document.querySelectorAll('button, [data-testid*="option"], .sc-1vg77x4-0'));
+            const negeerTeksten = ['ik weet het niet', 'weet ik niet', 'geen idee', "don't know", 'i dont know', "i don't know"];
 
-            let hoogsteKnopScore = 0;
-            vertalingenLijst.forEach(vertaling => {
-                const score = berekenSimilarityScore(knopTekst, vertaling);
-                if (score > hoogsteKnopScore) hoogsteKnopScore = score;
+            let geanalyseerdeOpties = [];
+
+            schermOpties.forEach(optie => {
+                if (optie.closest('#memrise-smart-gui') || optie === targetElement) return;
+
+                const knopTekst = verplaatsNummerNaarAchter(optie.innerText);
+                if (!knopTekst || knopTekst.length > 80) return;
+                if (negeerTeksten.some(ongewenst => knopTekst.includes(ongewenst))) return;
+
+                let hoogsteKnopScore = 0;
+                vertalingenLijst.forEach(vertaling => {
+                    const score = berekenSimilarityScore(knopTekst, vertaling);
+                    if (score > hoogsteKnopScore) hoogsteKnopScore = score;
+                });
+
+                geanalyseerdeOpties.push({
+                    element: optie,
+                    tekst: knopTekst,
+                    score: hoogsteKnopScore
+                });
             });
 
-            geanalyseerdeOpties.push({
-                element: optie,
-                tekst: knopTekst,
-                score: hoogsteKnopScore
+            geanalyseerdeOpties.sort((a, b) => b.score - a.score);
+
+            document.querySelectorAll('.memrise-matched-option').forEach(el => {
+                el.style.border = '';
+                el.style.backgroundColor = '';
             });
-        });
 
-        geanalyseerdeOpties.sort((a, b) => b.score - a.score);
+            if (geanalyseerdeOpties.length > 0) {
+                const besteMatch = geanalyseerdeOpties[0];
+                besteMatch.element.classList.add('memrise-matched-option');
+                besteMatch.element.style.border = '3px solid #a6e3a1';
+                besteMatch.element.style.backgroundColor = '#2e4235';
 
-        document.querySelectorAll('.memrise-matched-option').forEach(el => {
-            el.style.border = '';
-            el.style.backgroundColor = '';
-        });
+                besteMatch.element.click();
+                statusBox.innerHTML = `🎯 <b>Beste match gekozen (${Math.round(besteMatch.score)}% zeker):</b><br><b>${besteMatch.tekst}</b>`;
+            } else {
+                statusBox.innerHTML = `💡 Geen geschikte opties gevonden.`;
+            }
+        } finally {
+            isVerwerkenBezig = false;
+        }
+    }
 
-        if (geanalyseerdeOpties.length > 0) {
-            const besteMatch = geanalyseerdeOpties[0];
-            besteMatch.element.classList.add('memrise-matched-option');
-            besteMatch.element.style.border = '3px solid #a6e3a1';
-            besteMatch.element.style.backgroundColor = '#2e4235';
+    // Event listeners voor buttons
+    document.getElementById('auto-translate-btn').addEventListener('click', voerAnalyseUit);
 
-            besteMatch.element.click();
-            statusBox.innerHTML = `🎯 <b>Beste match gekozen (${Math.round(besteMatch.score)}% zeker):</b><br><b>${besteMatch.tekst}</b>`;
+    autoBtn.addEventListener('click', () => {
+        autoModusActief = !autoModusActief;
+        if (autoModusActief) {
+            autoBtn.innerText = "🤖 Auto Modus: AAN";
+            autoBtn.style.backgroundColor = "#a6e3a1";
+            
+            autoModusInterval = setInterval(() => {
+                voerAnalyseUit();
+            }, 1500);
         } else {
-            statusBox.innerHTML = `💡 Geen geschikte opties gevonden.`;
+            autoBtn.innerText = "🤖 Auto Modus: UIT";
+            autoBtn.style.backgroundColor = "#f38ba8";
+            clearInterval(autoModusInterval);
         }
     });
 })();
