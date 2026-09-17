@@ -1,3 +1,282 @@
+{
+  "bedankt": [
+    "merci",
+    "merci 3"
+  ],
+  "merci": [
+    "bedankt"
+  ],
+  "geweldig": [
+    "super",
+    "génial",
+    "geweldig"
+  ],
+  "génial": [
+    "geweldig"
+  ],
+  "nee": [
+    "non"
+  ],
+  "wie": [
+    "qui",
+    "wie",
+    "wie zijn wij?",
+    "wie unter ziff."
+  ],
+  "qui": [
+    "wie"
+  ],
+  "tot later": [
+    "à plus",
+    "à plus 2"
+  ],
+  "nederlands": [
+    "néerlandais(e)",
+    "néerlandais(e) 1",
+    "néerlandais(e) 4",
+    "2\nnéerlandais(e)"
+  ],
+  "néerlandais(e)": [
+    "nederlands",
+    "3\nnederlands",
+    "(Nederlands)",
+    "Nederlands"
+  ],
+  "het is, dat is": [
+    "c'est",
+    "c'est 4",
+    "volgende",
+    "c'est 1",
+    "3\nc'est"
+  ],
+  "het museum": [
+    "le musée 3",
+    "si le musée",
+    "<g id=\"74\">le musée</g>",
+    "le musée dr."
+  ],
+  "si le musée": [
+    "het museum"
+  ],
+  "le musée": [
+    "het museum 2",
+    "<g id=\"74\">het museum</g>",
+    "het museum"
+  ],
+  "ook": [
+    "aussi 3",
+    "brainfuck",
+    "ook",
+    "ik heb niet buurman"
+  ],
+  "brainfuck": [
+    "ook"
+  ],
+  "aussi": [
+    "ook 4",
+    "ook 1",
+    "tevens",
+    "ook"
+  ],
+  "in": [
+    "dans 1"
+  ],
+  "frans": [
+    "français(e)",
+    "français(e) 2",
+    "2\nfrançais(e)"
+  ],
+  "mevrouw": [
+    "madame",
+    "madame 4",
+    "4\nmadame"
+  ],
+  "meneer": [
+    "monsieur",
+    "monsieur 1",
+    "3\nmonsieur"
+  ],
+  "madame": [
+    "mevrouw",
+    "4\nmevrouw"
+  ],
+  "waar?": [
+    "où ?",
+    "où ? 1",
+    "1\noù ?"
+  ],
+  "er is, er zijn": [
+    "il y a 1",
+    "3\nil y a"
+  ],
+  "c'est": [
+    "het is, dat is",
+    "het is, dat is 4",
+    "het is, dat is 3",
+    "niet nu",
+    "2\nhet is, dat is",
+    "1\nhet is, dat is",
+    "het is",
+    "Dat is nu bereikt.",
+    "Dat is alles."
+  ],
+  "français(e)": [
+    "frans",
+    "3\nfrans"
+  ],
+  "où ?": [
+    "waar?",
+    "1\nwaar?",
+    "Waar?",
+    "waarbij:"
+  ],
+  "la rue": [
+    "de straat 1",
+    "de straat 3",
+    "niet nu"
+  ],
+  "de stad": [
+    "la ville 1",
+    "la ville 4"
+  ],
+  "de straat": [
+    "la rue 1"
+  ],
+  "de hobby, passie": [
+    "la passion 4",
+    "la rue 1",
+    "le passe-temps, la passion",
+    "(18 000 aujourd’hui), mais ceux-ci continuent d’organiser des concours,",
+    "du 14 au 17 mars, vous trouverez ava chez creativa, le salon du diy et des loisirs créatifs à bruxelles."
+  ],
+  "de inwoner": [
+    "l'habitant (m) 2",
+    "le résident",
+    "vers ses habitants"
+  ],
+  "l'habitant (m)": [
+    "volgende"
+  ],
+  "dans": [
+    "in 4",
+    "in 3"
+  ],
+  "dag": [
+    "bonjour 3",
+    "jour",
+    "salut"
+  ],
+  "goedenavond": [
+    "bonsoir 3",
+    "bonsoir 2"
+  ],
+  "tot gauw": [
+    "à bientôt 4",
+    "à plus 1"
+  ],
+  "tot ziens": [
+    "au revoir 2"
+  ],
+  "de school": [
+    "l'école (f) 1",
+    "l'école (f) 2"
+  ],
+  "ik heet (heten)": [
+    "je m'appelle (s'appeler) 2",
+    "je m'appelle (s'appeler) 1"
+  ],
+  "de wijk": [
+    "le quartier 1",
+    "le quartier 3"
+  ],
+  "ik woon (wonen)": [
+    "j'habite (habiter) 4"
+  ],
+  "niet slecht": [
+    "pas mal 2"
+  ],
+  "hoe gaat het?": [
+    "ça va ?",
+    "ça va ? 2"
+  ],
+  "tot morgen": [
+    "à demain 1"
+  ],
+  "ja": [
+    "oui",
+    "oui 4"
+  ],
+  "de jongen": [
+    "le garçon",
+    "le garçon saute.",
+    "c'est le garçon."
+  ],
+  "daar is, daar zijn": [
+    "voilà",
+    "il y a 3",
+    "daar is, daar zijn",
+    "is , wordt vermoed daar zijn hoofdverblijfplaats te hebben ;"
+  ],
+  "hoi": [
+    "salut 3"
+  ],
+  "het land": [
+    "le pays 3",
+    "le quartier 1"
+  ],
+  "de vriend": [
+    "le copain",
+    "l'ami (m) 3",
+    "l'ami",
+    "l'ami de tous les enfants ........",
+    "le copain a yoan était bourrée"
+  ],
+  "en jij?": [
+    "et toi ? 3",
+    "in jij?",
+    "meer weten?"
+  ],
+  "frankrijk": [
+    "la france 3",
+    "frankrijk",
+    "france"
+  ],
+  "l'ami (m)": [
+    "de vriend 2",
+    "vriend (m)"
+  ],
+  "la france": [
+    "frankrijk 2",
+    "frankrijk 3",
+    "n/491/c/95 - oostenrijk",
+    "frankri ik",
+    "frankrijk"
+  ],
+  "de klas": [
+    "la classe 4",
+    "la classe",
+    "° la classe; 1",
+    "niveau de la classe"
+  ],
+  "groot": [
+    "grand 1",
+    "tegenovergesteld",
+    "groot",
+    "de groot,"
+  ],
+  "grand": [
+    "groot",
+    "grote"
+  ],
+  "ik ben": [
+    "je suis",
+    "je suis 2",
+    "ik ben",
+    "ben"
+  ],
+  "jij bent": [
+    "tu es",
+    "tu es 1",
     "jij bent",
     "jij",
     "bent"
@@ -519,6 +798,7 @@
     "de jongen"
   ],
   "la fille": [
+    "de dochter",
     "het meisje"
   ],
   "monsieur": [
@@ -765,5 +1045,368 @@
   ],
   "werk samen.": [
     "travaillez à deux."
+  ],
+  "la famille": [
+    "het gezin, de familie"
+  ],
+  "het gezin, de familie": [
+    "la famille"
+  ],
+  "le frère": [
+    "de broer"
+  ],
+  "de broer": [
+    "le frère"
+  ],
+  "la sœur": [
+    "de zus"
+  ],
+  "de zus": [
+    "la sœur"
+  ],
+  "les parents (m pl)": [
+    "de ouders"
+  ],
+  "de ouders": [
+    "les parents (m pl)"
+  ],
+  "l'enfant (m / f)": [
+    "het kind"
+  ],
+  "het kind": [
+    "l'enfant (m / f)"
+  ],
+  "le père": [
+    "de vader"
+  ],
+  "de vader": [
+    "le père"
+  ],
+  "la mère": [
+    "de moeder"
+  ],
+  "de moeder": [
+    "la mère"
+  ],
+  "papa": [
+    "papa"
+  ],
+  "maman": [
+    "mama"
+  ],
+  "mama": [
+    "maman"
+  ],
+  "le fils": [
+    "de zoon"
+  ],
+  "de zoon": [
+    "le fils"
+  ],
+  "à la maison": [
+    "thuis"
+  ],
+  "thuis": [
+    "à la maison"
+  ],
+  "l'invitation (f)": [
+    "de uitnodiging"
+  ],
+  "de uitnodiging": [
+    "l'invitation (f)"
+  ],
+  "organiser": [
+    "organiseren"
+  ],
+  "organiseren": [
+    "organiser"
+  ],
+  "de dochter": [
+    "la fille"
+  ],
+  "l'oncle (m)": [
+    "de oom"
+  ],
+  "de oom": [
+    "l'oncle (m)"
+  ],
+  "la tante": [
+    "de tante"
+  ],
+  "de tante": [
+    "la tante"
+  ],
+  "le grand-père": [
+    "de opa"
+  ],
+  "de opa": [
+    "le grand-père"
+  ],
+  "la grand-mère": [
+    "de oma"
+  ],
+  "de oma": [
+    "la grand-mère"
+  ],
+  "les grands-parents (m pl)": [
+    "de grootouders"
+  ],
+  "de grootouders": [
+    "les grands-parents (m pl)"
+  ],
+  "le cousin": [
+    "de neef"
+  ],
+  "de neef": [
+    "le cousin"
+  ],
+  "la cousine": [
+    "de nicht"
+  ],
+  "de nicht": [
+    "la cousine"
+  ],
+  "marié (se marier)": [
+    "getrouwd (trouwen)"
+  ],
+  "getrouwd (trouwen)": [
+    "marié (se marier)"
+  ],
+  "divorcé (divorcer)": [
+    "gescheiden (scheiden)"
+  ],
+  "gescheiden (scheiden)": [
+    "divorcé (divorcer)"
+  ],
+  "recontrer": [
+    "ontmoeten"
+  ],
+  "ontmoeten": [
+    "recontrer"
+  ],
+  "le rendez-vous": [
+    "de afspraak"
+  ],
+  "de afspraak": [
+    "le rendez-vous"
+  ],
+  "l'an (m)": [
+    "het jaar"
+  ],
+  "het jaar": [
+    "l'an (m)"
+  ],
+  "l'ouest (m)": [
+    "het westen"
+  ],
+  "het westen": [
+    "l'ouest (m)"
+  ],
+  "samedi": [
+    "zaterdag"
+  ],
+  "zaterdag": [
+    "samedi"
+  ],
+  "juin": [
+    "juni"
+  ],
+  "juni": [
+    "juin"
+  ],
+  "le prix": [
+    "de prijs"
+  ],
+  "de prijs": [
+    "le prix"
+  ],
+  "les jumeaux (m pl)": [
+    "de tweeling"
+  ],
+  "de tweeling": [
+    "les jumeaux (m pl)"
+  ],
+  "travailler": [
+    "werken"
+  ],
+  "werken": [
+    "travailler"
+  ],
+  "le hobby": [
+    "de hobby"
+  ],
+  "de hobby": [
+    "le hobby"
+  ],
+  "autre": [
+    "ander"
+  ],
+  "ander": [
+    "autre"
+  ],
+  "chez nous": [
+    "bij ons (thuis)"
+  ],
+  "bij ons (thuis)": [
+    "chez nous"
+  ],
+  "le chien": [
+    "de hond"
+  ],
+  "de hond": [
+    "le chien"
+  ],
+  "noir": [
+    "zwart"
+  ],
+  "zwart": [
+    "noir"
+  ],
+  "tous les deux": [
+    "allebei"
+  ],
+  "allebei": [
+    "tous les deux"
+  ],
+  "l'adulte (m / f)": [
+    "de volwassene"
+  ],
+  "de volwassene": [
+    "l'adulte (m / f)"
+  ],
+  "avoir": [
+    "hebben"
+  ],
+  "hebben": [
+    "avoir"
+  ],
+  "j'ai": [
+    "ik heb"
+  ],
+  "ik heb": [
+    "j'ai"
+  ],
+  "tu as": [
+    "jij hebt"
+  ],
+  "jij hebt": [
+    "tu as"
+  ],
+  "il a": [
+    "hij heeft"
+  ],
+  "hij heeft": [
+    "il a"
+  ],
+  "elle a": [
+    "zij heeft"
+  ],
+  "zij heeft": [
+    "elle a"
+  ],
+  "on a": [
+    "men heeft/we hebben"
+  ],
+  "men heeft/we hebben": [
+    "on a"
+  ],
+  "vous avez": [
+    "jullie hebben, u heeft"
+  ],
+  "jullie hebben, u heeft": [
+    "vous avez"
+  ],
+  "ils ont": [
+    "zij hebben (m)"
+  ],
+  "zij hebben (m)": [
+    "ils ont"
+  ],
+  "elles ont": [
+    "zij hebben (vrouwelijk)"
+  ],
+  "zij hebben (vrouwelijk)": [
+    "elles ont"
+  ],
+  "le train": [
+    "de trein"
+  ],
+  "de trein": [
+    "le train"
+  ],
+  "le fils / la fille unique": [
+    "het enig kind"
+  ],
+  "het enig kind": [
+    "le fils / la fille unique"
+  ],
+  "la fête": [
+    "het feest"
+  ],
+  "het feest": [
+    "la fête"
+  ],
+  "le demi-frère": [
+    "de halfbroer"
+  ],
+  "de halfbroer": [
+    "le demi-frère"
+  ],
+  "seul(e)": [
+    "alleen"
+  ],
+  "alleen": [
+    "seul(e)"
+  ],
+  "tu connais (connaitre)": [
+    "jij kent (kennen)"
+  ],
+  "jij kent (kennen)": [
+    "tu connais (connaitre)"
+  ],
+  "la voisine": [
+    "de buurvrouw"
+  ],
+  "de buurvrouw": [
+    "la voisine"
+  ],
+  "le voisin": [
+    "de buurman"
+  ],
+  "de buurman": [
+    "le voisin"
+  ],
+  "l'anniversaire (m)": [
+    "de verjaardag"
+  ],
+  "de verjaardag": [
+    "l'anniversaire (m)"
+  ],
+  "inviter": [
+    "uitnodigen"
+  ],
+  "uitnodigen": [
+    "inviter"
+  ],
+  "attends ! (attendre)": [
+    "wacht! (wachten op)"
+  ],
+  "wacht! (wachten op)": [
+    "attends ! (attendre)"
+  ],
+  "le weekend": [
+    "het weekend"
+  ],
+  "het weekend": [
+    "le weekend"
+  ],
+  "écouter": [
+    "luisteren naar"
+  ],
+  "luisteren naar": [
+    "écouter"
+  ],
+  "le copain": [
+    "de vriend"
   ]
 }
