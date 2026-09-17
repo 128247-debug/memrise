@@ -1,282 +1,34 @@
-{
-  "bedankt": [
-    "merci 3",
-    "merci"
-  ],
-  "merci": [
-    "bedankt"
-  ],
-  "wie": [
-    "qui",
-    "wie",
-    "wie zijn wij?",
-    "wie unter ziff."
-  ],
-  "qui": [
-    "wie"
-  ],
-  "tot later": [
-    "à plus 2"
-  ],
-  "nederlands": [
-    "néerlandais(e) 1",
-    "néerlandais(e) 4",
-    "2\nnéerlandais(e)"
-  ],
-  "néerlandais(e)": [
-    "3\nnederlands",
-    "nederlands",
-    "(Nederlands)",
-    "Nederlands"
-  ],
-  "het is, dat is": [
-    "c'est 4",
-    "volgende",
-    "c'est 1",
-    "3\nc'est"
-  ],
-  "het museum": [
-    "le musée 3",
-    "si le musée",
-    "<g id=\"74\">le musée</g>",
-    "le musée dr."
-  ],
-  "si le musée": [
-    "het museum"
-  ],
-  "le musée": [
-    "het museum 2",
-    "<g id=\"74\">het museum</g>",
-    "het museum"
-  ],
-  "ook": [
-    "aussi 3",
-    "brainfuck",
-    "ook",
-    "ik heb niet buurman"
-  ],
-  "brainfuck": [
-    "ook"
-  ],
-  "aussi": [
-    "ook 4",
-    "ook 1",
-    "tevens",
-    "ook"
-  ],
-  "in": [
-    "dans 1"
-  ],
-  "frans": [
-    "français(e) 2",
-    "2\nfrançais(e)"
-  ],
-  "mevrouw": [
-    "madame 4",
-    "4\nmadame"
-  ],
-  "meneer": [
-    "monsieur 1",
-    "3\nmonsieur"
-  ],
-  "madame": [
-    "4\nmevrouw"
-  ],
-  "waar?": [
-    "où ? 1",
-    "1\noù ?"
-  ],
-  "er is, er zijn": [
-    "il y a 1",
-    "3\nil y a"
-  ],
-  "c'est": [
-    "het is, dat is 4",
-    "het is, dat is 3",
-    "niet nu",
-    "2\nhet is, dat is",
-    "1\nhet is, dat is",
-    "het is",
-    "Dat is nu bereikt.",
-    "Dat is alles."
-  ],
-  "français(e)": [
-    "3\nfrans"
-  ],
-  "où ?": [
-    "1\nwaar?",
-    "Waar?",
-    "waarbij:"
-  ],
-  "la rue": [
-    "de straat 1",
-    "de straat 3",
-    "niet nu"
-  ],
-  "de stad": [
-    "la ville 1",
-    "la ville 4"
-  ],
-  "de straat": [
-    "la rue 1"
-  ],
-  "de hobby, passie": [
-    "la passion 4",
-    "la rue 1",
-    "le passe-temps, la passion",
-    "(18 000 aujourd’hui), mais ceux-ci continuent d’organiser des concours,",
-    "du 14 au 17 mars, vous trouverez ava chez creativa, le salon du diy et des loisirs créatifs à bruxelles."
-  ],
-  "de inwoner": [
-    "l'habitant (m) 2",
-    "le résident",
-    "vers ses habitants"
-  ],
-  "l'habitant (m)": [
-    "volgende"
-  ],
-  "dans": [
-    "in 4",
-    "in 3"
-  ],
-  "dag": [
-    "bonjour 3",
-    "jour",
-    "salut"
-  ],
-  "goedenavond": [
-    "bonsoir 3",
-    "bonsoir 2"
-  ],
-  "tot gauw": [
-    "à bientôt 4",
-    "à plus 1"
-  ],
-  "tot ziens": [
-    "au revoir 2"
-  ],
-  "de school": [
-    "l'école (f) 1",
-    "l'école (f) 2"
-  ],
-  "ik heet (heten)": [
-    "je m'appelle (s'appeler) 2",
-    "je m'appelle (s'appeler) 1"
-  ],
-  "de wijk": [
-    "le quartier 1",
-    "le quartier 3"
-  ],
-  "ik woon (wonen)": [
-    "j'habite (habiter) 4"
-  ],
-  "niet slecht": [
-    "pas mal 2"
-  ],
-  "hoe gaat het?": [
-    "ça va ? 2"
-  ],
-  "tot morgen": [
-    "à demain 1"
-  ],
-  "ja": [
-    "oui 4"
-  ],
-  "de jongen": [
-    "le garçon",
-    "le garçon saute.",
-    "c'est le garçon."
-  ],
-  "daar is, daar zijn": [
-    "voilà",
-    "il y a 3",
-    "daar is, daar zijn",
-    "is , wordt vermoed daar zijn hoofdverblijfplaats te hebben ;"
-  ],
-  "hoi": [
-    "salut 3"
-  ],
-  "het land": [
-    "le pays 3",
-    "le quartier 1"
-  ],
-  "de vriend": [
-    "l'ami (m) 3",
-    "l'ami",
-    "l'ami de tous les enfants ........",
-    "le copain a yoan était bourrée"
-  ],
-  "en jij?": [
-    "et toi ? 3",
-    "in jij?",
-    "meer weten?"
-  ],
-  "frankrijk": [
-    "la france 3",
-    "frankrijk",
-    "france"
-  ],
-  "l'ami (m)": [
-    "de vriend 2",
-    "vriend (m)"
-  ],
-  "la france": [
-    "frankrijk 2",
-    "frankrijk 3",
-    "n/491/c/95 - oostenrijk",
-    "frankri ik",
-    "frankrijk"
-  ],
-  "de klas": [
-    "la classe 4",
-    "la classe",
-    "° la classe; 1",
-    "niveau de la classe"
-  ],
-  "groot": [
-    "grand 1",
-    "tegenovergesteld",
-    "groot",
-    "de groot,"
-  ],
-  "grand": [
-    "groot",
-    "grote"
-  ],
-  "ik ben": [
-    "je suis 2",
-    "ik ben",
-    "ben"
-  ],
-  "jij bent": [
-    "tu es 1",
     "jij bent",
     "jij",
     "bent"
   ],
   "hij is/is hij": [
+    "il est",
     "il est 3",
     "hij is/is hij",
     "intermediate system-to-intermediate system"
   ],
   "zij is/is zij": [
+    "elle est",
     "elle est 1",
     "zij is/is zij",
     "intermediate system-to-intermediate system"
   ],
   "je suis": [
+    "ik ben",
     "ik ben 2",
     "ik ben 1",
-    "ik ben",
     "ik ben er zeker van dat dat de juiste weg is.",
     "ik ben ...."
   ],
   "on est": [
+    "men is/we zijn",
     "wij zijn",
     "we zijn met 10!!!",
     "we zijn aangekomen."
   ],
   "il est": [
+    "hij is/is hij",
     "hij is/is hij 4",
     "hij is/is hij 3",
     "het toestel",
@@ -284,17 +36,20 @@
     "met"
   ],
   "men is/we zijn": [
+    "on est",
     "on est 3",
     "men is/we zijn",
     "we zijn een half uur verwijderd van valladolid."
   ],
   "elle est": [
+    "zij is/is zij",
     "zij is/is zij 4",
     "tegenwoordig",
     "zij is:",
     "daar is hij!"
   ],
   "tu es": [
+    "jij bent",
     "jij bent 2",
     "je bent",
     "weet je het zeker?",
@@ -338,12 +93,9 @@
     "hier is, hier zijn"
   ],
   "à plus": [
+    "tot later",
     "tot dan!",
     "naar meer"
-  ],
-  "nee": [
-    "niet nu",
-    "non"
   ],
   "het meisje": [
     "la fille",
@@ -351,78 +103,93 @@
     "le"
   ],
   "non": [
+    "nee",
     "à plus 3"
   ],
   "wij zijn": [
+    "nous sommes",
     "nous sommes 4"
   ],
   "vous êtes": [
+    "jullie zijn, u bent",
     "nous sommes 4"
   ],
   "elles sont": [
+    "zij zijn (vrouwelijk)",
     "zij zijn (vrouwelijk) 2",
     "zijn",
     "deze plaal-",
     "ze zijn"
   ],
   "zij zijn (vrouwelijk)": [
+    "elles sont",
     "elles sont 2",
     "elles sont 4",
     "zij zijn (vrouwelijk)"
   ],
   "être": [
+    "zijn",
     "zijn 1",
     "zij zijn (vrouwelijk) 2"
   ],
   "zijn": [
+    "être",
     "être 1",
     "zijn",
     "[nl] zijn",
     "verschuldigd zijn ."
   ],
   "de vriendin": [
+    "l'amie (f)",
     "l'amie (f) 3",
     "la petite amie",
     "la petite amie de schepers avait mieux compris.",
     "<g id=\"1\">juge d'instruction</g><g id=\"2\">: est-ce que vous avezfait la connaissance de la copine de ban ?</g>"
   ],
   "hoe?": [
+    "comment ?",
     "comment ? 3",
     "comment ? 1"
   ],
   "ça va bien": [
+    "het gaat goed",
     "het gaat goed 1",
     "comment ? 1"
   ],
   "het gaat goed": [
+    "ça va bien",
     "ça va bien 4",
     "ça va bien 3"
   ],
   "de voornaam": [
+    "le prénom",
     "le prénom 2"
   ],
   "l'amie (f)": [
+    "de vriendin",
     "de vriendin 4",
     "de vriendin 3",
     "vriend (en) (f)"
   ],
   "comment ?": [
+    "hoe?",
     "hoe? 1",
-    "wat zeg je?",
-    "hoe?"
+    "wat zeg je?"
   ],
   "jij woont (wonen)": [
+    "tu habites (habiter)",
     "tu habites (habiter) 1",
     "jij woont (wonen)"
   ],
   "le prénom": [
+    "de voornaam",
     "de voornaam 2",
     "de voornaam 4",
-    "de voornaam",
     "de voornaam.",
     "voornaam,"
   ],
   "tu habites (habiter)": [
+    "jij woont (wonen)",
     "jij woont (wonen) 3",
     "u woont (live)",
     "je woont waar?",
@@ -459,5 +226,544 @@
   ],
   "moi ?": [
     "ik?"
+  ],
+  "je hebt de sessie voltooid!": [
+    "(goed bezig)"
+  ],
+  "(goed bezig)": [
+    "je hebt de sessie voltooid!"
+  ],
+  "nouveau, nouvelle": [
+    "nieuw"
+  ],
+  "nieuw": [
+    "nouveau, nouvelle"
+  ],
+  "daar,daarginds": [
+    "là-bas",
+    "daar,daarginds",
+    "darr"
+  ],
+  "là-bas": [
+    "daar,daarginds",
+    "là-bas",
+    "daar!",
+    "hierin wordt"
+  ],
+  "regarde ! (regarder)": [
+    "kijk! (kijken naar)"
+  ],
+  "kijk! (kijken naar)": [
+    "regarde ! (regarder)"
+  ],
+  "tout près": [
+    "vlakbij"
+  ],
+  "vlakbij": [
+    "tout près"
+  ],
+  "écoutez ! (écouter)": [
+    "luister! (luisteren naar)"
+  ],
+  "luister! (luisteren naar)": [
+    "écoutez ! (écouter)"
+  ],
+  "c'est l'heure": [
+    "het is tijd"
+  ],
+  "het is tijd": [
+    "c'est l'heure"
+  ],
+  "excuse-moi": [
+    "sorry"
+  ],
+  "sorry": [
+    "excuse-moi"
+  ],
+  "het voetbalveld": [
+    "le terrain de foot",
+    "le terrain de football",
+    "le"
+  ],
+  "le terrain de foot": [
+    "het voetbalveld"
+  ],
+  "we gaan, zullen (gaan)": [
+    "on va (aller)",
+    "we gaan, zullen (gaan)",
+    "onderstaand het menu wat we gaan gebruiken."
+  ],
+  "on va (aller)": [
+    "we gaan, zullen (gaan)"
+  ],
+  "het is mogelijk": [
+    "c'est possible",
+    "nous pouvons y parvenir.",
+    "c’ est une possibilité.",
+    "c’est possible !&#10;&#10;"
+  ],
+  "c'est possible": [
+    "het is mogelijk"
+  ],
+  "comment tu t'appelles ?": [
+    "hoe heet je?"
+  ],
+  "hoe heet je?": [
+    "comment tu t'appelles ?"
+  ],
+  "je m'appelle thomas.": [
+    "ik heet thomas."
+  ],
+  "ik heet thomas.": [
+    "je m'appelle thomas."
+  ],
+  "tu es en quelle classe ?": [
+    "in welke klas zit je?"
+  ],
+  "in welke klas zit je?": [
+    "tu es en quelle classe ?"
+  ],
+  "je suis en cinquième.": [
+    "ik zit in de brugklas."
+  ],
+  "ik zit in de brugklas.": [
+    "je suis en cinquième."
+  ],
+  "qui est-ce ?": [
+    "wie is dat?"
+  ],
+  "wie is dat?": [
+    "qui est-ce ?"
+  ],
+  "c'est maxime.": [
+    "dat is maxime."
+  ],
+  "dat is maxime.": [
+    "c'est maxime."
+  ],
+  "tu habites où ?": [
+    "waar woon je?"
+  ],
+  "waar woon je?": [
+    "tu habites où ?"
+  ],
+  "j'habite à paris.": [
+    "ik woon in parijs."
+  ],
+  "ik woon in parijs.": [
+    "j'habite à paris."
+  ],
+  "on va être des ami(e)s ?": [
+    "zullen we vrienden/vriendinnen worden?",
+    "volgende"
+  ],
+  "zullen we vrienden/vriendinnen worden?": [
+    "on va être des ami(e)s ?"
+  ],
+  "c'est tout près de marseille.": [
+    "het is dicht bij marseille."
+  ],
+  "het is dicht bij marseille.": [
+    "c'est tout près de marseille."
+  ],
+  "volgende": [
+    "on va être des ami(e)s ?"
+  ],
+  "canadien, canadienne": [
+    "canadees"
+  ],
+  "canadees": [
+    "canadien, canadienne"
+  ],
+  "belge": [
+    "belgisch"
+  ],
+  "belgisch": [
+    "belge"
+  ],
+  "la mer": [
+    "de zee"
+  ],
+  "de zee": [
+    "la mer"
+  ],
+  "super": [
+    "geweldig"
+  ],
+  "petit": [
+    "klein"
+  ],
+  "klein": [
+    "petit"
+  ],
+  "de": [
+    "van"
+  ],
+  "van": [
+    "de"
+  ],
+  "content": [
+    "blij, tevreden"
+  ],
+  "blij, tevreden": [
+    "content"
+  ],
+  "ou": [
+    "of"
+  ],
+  "of": [
+    "ou"
+  ],
+  "sportif, sportive": [
+    "sportief"
+  ],
+  "sportief": [
+    "sportif, sportive"
+  ],
+  "le bus": [
+    "de bus"
+  ],
+  "de bus": [
+    "le bus"
+  ],
+  "le vélo": [
+    "de fiets"
+  ],
+  "de fiets": [
+    "le vélo"
+  ],
+  "le village": [
+    "het dorp"
+  ],
+  "het dorp": [
+    "le village"
+  ],
+  "le nom de famille": [
+    "de achternaam"
+  ],
+  "de achternaam": [
+    "le nom de famille"
+  ],
+  "l'âge (m)": [
+    "de leeftijd"
+  ],
+  "de leeftijd": [
+    "l'âge (m)"
+  ],
+  "l'adresse (f)": [
+    "het adres"
+  ],
+  "het adres": [
+    "l'adresse (f)"
+  ],
+  "la nationalité": [
+    "de nationaliteit"
+  ],
+  "de nationaliteit": [
+    "la nationalité"
+  ],
+  "près de": [
+    "dichtbij"
+  ],
+  "dichtbij": [
+    "près de"
+  ],
+  "alors": [
+    "dan, dus"
+  ],
+  "dan, dus": [
+    "alors"
+  ],
+  "nager": [
+    "zwemmen"
+  ],
+  "zwemmen": [
+    "nager"
+  ],
+  "la télé": [
+    "de televisie"
+  ],
+  "de televisie": [
+    "la télé"
+  ],
+  "de muziek": [
+    "la musique"
+  ],
+  "la musique": [
+    "de muziek"
+  ],
+  "l'étage (m)": [
+    "de verdieping"
+  ],
+  "de verdieping": [
+    "l'étage (m)"
+  ],
+  "heureusement": [
+    "gelukkig"
+  ],
+  "gelukkig": [
+    "heureusement"
+  ],
+  "ça va ?": [
+    "hoe gaat het?"
+  ],
+  "au revoir": [
+    "vaarwel",
+    "tot ziens",
+    "tot ziens."
+  ],
+  "oui": [
+    "ja"
+  ],
+  "le garçon": [
+    "de jongen"
+  ],
+  "la fille": [
+    "het meisje"
+  ],
+  "monsieur": [
+    "meneer"
+  ],
+  "nous sommes": [
+    "wij zijn"
+  ],
+  "jullie zijn, u bent": [
+    "vous êtes"
+  ],
+  "ils sont": [
+    "zij zijn (m)"
+  ],
+  "zij zijn (m)": [
+    "ils sont"
+  ],
+  "en cinquième": [
+    "in de brugklas"
+  ],
+  "in de brugklas": [
+    "en cinquième"
+  ],
+  "le / la même": [
+    "dezelfde, hetzelfde"
+  ],
+  "dezelfde, hetzelfde": [
+    "le / la même"
+  ],
+  "sympa": [
+    "aardig"
+  ],
+  "aardig": [
+    "sympa"
+  ],
+  "je te présente (présenter)": [
+    "ik stel je voor (voorstellen)"
+  ],
+  "ik stel je voor (voorstellen)": [
+    "je te présente (présenter)"
+  ],
+  "la maison": [
+    "het huis"
+  ],
+  "het huis": [
+    "la maison"
+  ],
+  "het zwembad": [
+    "la piscine"
+  ],
+  "la piscine": [
+    "het zwembad"
+  ],
+  "ver": [
+    "loin",
+    "worm",
+    "ver ."
+  ],
+  "loin": [
+    "ver"
+  ],
+  "l'appartement (m)": [
+    "het appartement"
+  ],
+  "het appartement": [
+    "l'appartement (m)"
+  ],
+  "le jardin": [
+    "de tuin"
+  ],
+  "de tuin": [
+    "le jardin"
+  ],
+  "il s'appelle (s'appeler)": [
+    "hij heet (heten)"
+  ],
+  "hij heet (heten)": [
+    "il s'appelle (s'appeler)"
+  ],
+  "la minute": [
+    "de minuut"
+  ],
+  "de minuut": [
+    "la minute"
+  ],
+  "maintenant": [
+    "nu"
+  ],
+  "nu": [
+    "maintenant"
+  ],
+  "très": [
+    "heel, erg"
+  ],
+  "heel, erg": [
+    "très"
+  ],
+  "bien": [
+    "goed"
+  ],
+  "goed": [
+    "bien"
+  ],
+  "et": [
+    "en"
+  ],
+  "en": [
+    "et"
+  ],
+  "mais": [
+    "maar"
+  ],
+  "maar": [
+    "mais"
+  ],
+  "avec": [
+    "met"
+  ],
+  "met": [
+    "avec"
+  ],
+  "c'est vrai": [
+    "het is waar"
+  ],
+  "het is waar": [
+    "c'est vrai"
+  ],
+  "c'est une ville ou un village ?": [
+    "is het een dorp of een stad?"
+  ],
+  "is het een dorp of een stad?": [
+    "c'est une ville ou un village ?"
+  ],
+  "c'est un village.": [
+    "het is een dorp."
+  ],
+  "het is een dorp.": [
+    "c'est un village."
+  ],
+  "tu es néerlandais(e) ?": [
+    "ben je nederlands?"
+  ],
+  "ben je nederlands?": [
+    "tu es néerlandais(e) ?"
+  ],
+  "non, je suis français(e).": [
+    "nee, ik ben frans."
+  ],
+  "nee, ik ben frans.": [
+    "non, je suis français(e)."
+  ],
+  "j'habite dans une maison / un appartement.": [
+    "ik woon in een huis/een appartement."
+  ],
+  "ik woon in een huis/een appartement.": [
+    "j'habite dans une maison / un appartement."
+  ],
+  "le collège est à 10 minutes.": [
+    "de middelbare school is op 10 minuten afstand."
+  ],
+  "de middelbare school is op 10 minuten afstand.": [
+    "le collège est à 10 minutes."
+  ],
+  "j'aime le foot.": [
+    "ik hou van voetbal."
+  ],
+  "ik hou van voetbal.": [
+    "j'aime le foot."
+  ],
+  "dans le quartier, il y a un terrain de foot.": [
+    "in de wijk is een voetbalveld."
+  ],
+  "in de wijk is een voetbalveld.": [
+    "dans le quartier, il y a un terrain de foot."
+  ],
+  "c'est tout près ou c'est loin ?": [
+    "is het dicht bij of ver weg?"
+  ],
+  "is het dicht bij of ver weg?": [
+    "c'est tout près ou c'est loin ?"
+  ],
+  "dans ma classe, il y a une file très sympa.": [
+    "in mijn klas zit een heel aardig meisje."
+  ],
+  "in mijn klas zit een heel aardig meisje.": [
+    "dans ma classe, il y a une file très sympa."
+  ],
+  "lees de tekst.": [
+    "lis le texte.",
+    "lire le texte.",
+    "j'ai devant moi le texte français:",
+    "j' ai devant moi le texte français:"
+  ],
+  "luister naar de dialoog.": [
+    "écoute le dialogue.",
+    "écoutez le dialogue.",
+    "écoutez le client.",
+    "écoute le comptable"
+  ],
+  "kijk naar de film.": [
+    "regarde le film.",
+    "regarder le film.",
+    "regardez la mer.",
+    "regardez la photo !"
+  ],
+  "écris un e-mail.": [
+    "schrijf een e-mail."
+  ],
+  "schrijf een e-mail.": [
+    "écris un e-mail."
+  ],
+  "lis le texte.": [
+    "lees de tekst."
+  ],
+  "beantwoord de vragen.": [
+    "réponds aux questions.",
+    "répondre aux questions.",
+    "répondez aux questions suivantes :",
+    "merci de répondre aux questions suivantes"
+  ],
+  "regarde le film.": [
+    "kijk naar de film."
+  ],
+  "écoute le dialogue.": [
+    "luister naar de dialoog."
+  ],
+  "réponds aux questions.": [
+    "beantwoord de vragen."
+  ],
+  "complète les phrases.": [
+    "vul de zinnen aan."
+  ],
+  "vul de zinnen aan.": [
+    "complète les phrases."
+  ],
+  "combine les images.": [
+    "combineer de afbeeldingen."
+  ],
+  "combineer de afbeeldingen.": [
+    "combine les images."
+  ],
+  "travaillez à deux.": [
+    "werk samen."
+  ],
+  "werk samen.": [
+    "travaillez à deux."
   ]
 }
