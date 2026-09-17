@@ -68,8 +68,13 @@ function createSmartProbabilityTranslatorGUI() {
         return match ? match[1] : null;
     }
 
+    function isZichtbaar(element) {
+        if (!element) return false;
+        return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
+    }
+
     function verstuurEnterToets(doelElement) {
-        const target = doelElement || document.activeElement || document;
+        const target = doelElement || document.activeElement || document.body || document;
         const opts = { key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true, cancelable: true };
         target.dispatchEvent(new KeyboardEvent('keydown', opts));
         target.dispatchEvent(new KeyboardEvent('keypress', opts));
@@ -102,16 +107,16 @@ function createSmartProbabilityTranslatorGUI() {
     }
 
     function klikVolgendeKnopOfEnter() {
-        let volgendeKnop = document.querySelector('button[data-testid*="next"], button[data-testid*="continue"]');
+        let volgendeKnop = document.querySelector('button[data-testid*="next"], button[data-testid*="continue"], button.sc-klj6s2-0.cImqEs');
         
         if (!volgendeKnop) {
             volgendeKnop = Array.from(document.querySelectorAll('button, a, div[role="button"]')).find(el => {
                 const tekst = el.innerText ? el.innerText.toLowerCase().trim() : '';
-                return tekst.includes('volgende') || tekst.includes('next') || tekst.includes('continue');
+                return (tekst.includes('volgende') || tekst.includes('next') || tekst.includes('continue') || tekst.includes('begrepen') || tekst.includes('got it')) && isZichtbaar(el);
             });
         }
 
-        if (volgendeKnop) {
+        if (volgendeKnop && isZichtbaar(volgendeKnop)) {
             volgendeKnop.click();
         } else {
             verstuurEnterToets();
@@ -120,7 +125,7 @@ function createSmartProbabilityTranslatorGUI() {
 
     function controleerEnSlaFoutPaginaOp() {
         const alleTeksten = Array.from(document.querySelectorAll('*'))
-            .filter(el => el.children.length === 0 && el.innerText && el.innerText.trim().length > 0);
+            .filter(el => el.children.length === 0 && el.innerText && el.innerText.trim().length > 0 && isZichtbaar(el));
 
         const isFoutScherm = alleTeksten.some(el => /jouw antwoord|your answer/i.test(el.innerText));
 
@@ -134,29 +139,39 @@ function createSmartProbabilityTranslatorGUI() {
 
             if (frTekst && nlTekst) {
                 slaOpInGeheugen(frTekst, nlTekst);
-                statusBox.innerHTML = `⚠️ <b>Juiste antwoord bijgewerkt in geheugen:</b><br>${frTekst} = ${nlTekst}`;
-                klikVolgendeKnopOfEnter();
-                return true;
+                statusBox.innerHTML = `⚠️ <b>Juiste antwoord bijgewerkt:</b><br>${frTekst} = ${nlTekst}`;
+            } else {
+                statusBox.innerHTML = `⚠️ <b>Foutscherm gedetecteerd. Druk op Enter...</b>`;
             }
+            klikVolgendeKnopOfEnter();
+            verstuurEnterToets();
+            return true;
         }
         return false;
     }
 
-    function controleerEnSlaLeerpaginaOp() {
+    async function controleerEnSlaLeerpaginaOp() {
         const hoofdelement = document.querySelector('[data-testid="presentation-header"], h2, h1');
         const subelement = document.querySelector('[data-testid="presentation-translation"], h3');
 
-        if (hoofdelement && subelement && hoofdelement.innerText && subelement.innerText) {
+        if (hoofdelement && subelement && isZichtbaar(hoofdelement) && hoofdelement.innerText && subelement.innerText) {
             slaOpInGeheugen(hoofdelement.innerText, subelement.innerText);
-            statusBox.innerHTML = `🧠 <b>Geleerd & Geupdated:</b><br>${hoofdelement.innerText} = ${subelement.innerText}`;
+            statusBox.innerHTML = `🧠 <b>Nieuw woord geleerd:</b><br>${hoofdelement.innerText} = ${subelement.innerText}`;
+            
+            await new Promise(r => setTimeout(r, 100));
+            
             klikVolgendeKnopOfEnter();
+            
+            await new Promise(r => setTimeout(r, 100));
+            verstuurEnterToets();
+
             return true;
         }
         return false;
     }
 
     document.addEventListener('click', (e) => {
-        const knop = e.target.closest('button, [data-testid*="option"], .sc-1vg77x4-0');
+        const knop = e.target.closest('button, [data-testid*="option"], .sc-1vg77x4-0, .sc-klj6s2-0');
         if (knop && !knop.closest('#memrise-smart-gui')) {
             laatstGeselecteerdeElement = knop;
         }
@@ -208,7 +223,7 @@ function createSmartProbabilityTranslatorGUI() {
         statusBox.innerHTML = `🧩 <b>Woorden klikken:</b><br><i>${verwachteWoorden.join(' ')}</i>`;
 
         for (const woord of verwachteWoorden) {
-            const knoppen = Array.from(document.querySelectorAll('button'));
+            const knoppen = Array.from(document.querySelectorAll('button, .sc-klj6s2-0')).filter(isZichtbaar);
             let besteKnop = null, besteScore = 0;
 
             knoppen.forEach(knop => {
@@ -268,7 +283,7 @@ function createSmartProbabilityTranslatorGUI() {
                     }
                 });
 
-                statusBox.innerText = "📂 Woordenlijst succesvol ingeladen en bijgewerkt!";
+                statusBox.innerText = "📂 Woordenlijst succesvol ingeladen!";
             } catch (err) {
                 statusBox.innerText = "❌ Ongeldig JSON-bestand.";
             }
@@ -278,7 +293,7 @@ function createSmartProbabilityTranslatorGUI() {
 
     document.getElementById('learn-correct-btn').addEventListener('click', () => {
         const targetElement = document.querySelector('span[dir="auto"], div[dir="auto"], [dir="auto"]');
-        if (!targetElement || !targetElement.innerText.trim() || !laatstGeselecteerdeElement || !laatstGeselecteerdeElement.innerText.trim()) {
+        if (!targetElement || !isZichtbaar(targetElement) || !targetElement.innerText.trim() || !laatstGeselecteerdeElement || !laatstGeselecteerdeElement.innerText.trim()) {
             statusBox.innerText = "❌ Selecteer eerst een antwoord op het scherm.";
             return;
         }
@@ -291,11 +306,12 @@ function createSmartProbabilityTranslatorGUI() {
         isVerwerkenBezig = true;
 
         try {
-            if (controleerEnSlaFoutPaginaOp() || controleerEnSlaLeerpaginaOp()) return;
+            if (controleerEnSlaFoutPaginaOp()) return;
+            if (await controleerEnSlaLeerpaginaOp()) return;
 
             const targetElement = document.querySelector('span[dir="auto"], div[dir="auto"], [dir="auto"]');
-            if (!targetElement || !targetElement.innerText.trim()) {
-                statusBox.innerText = "❌ Geen vraagtekst gevonden.";
+            if (!targetElement || !isZichtbaar(targetElement) || !targetElement.innerText.trim()) {
+                statusBox.innerText = "❌ Geen actieve vraag op het scherm.";
                 return;
             }
 
@@ -324,20 +340,21 @@ function createSmartProbabilityTranslatorGUI() {
             const vertalingenLijst = Array.from(mogelijkeVertalingen);
             const besteVertaling = vertalingenLijst[0] || "";
 
-            if (document.querySelector('button[data-testid="tapping-response-clear"]')) {
+            const tappingContainer = document.querySelector('button[data-testid="tapping-response-clear"]');
+            if (tappingContainer && isZichtbaar(tappingContainer)) {
                 await verwerkTappingOpdracht(besteVertaling);
                 return;
             }
 
             const inputField = document.querySelector('input[type="text"], textarea');
-            if (inputField) {
+            if (inputField && isZichtbaar(inputField)) {
                 const schoneTekst = verwijderNummersSchoon(besteVertaling);
                 await vulInputIn(inputField, schoneTekst);
                 statusBox.innerHTML = `✍️ <b>Antwoord ingevuld & verzonden:</b><br><b>${schoneTekst}</b>`;
                 return;
             }
 
-            const schermOpties = Array.from(document.querySelectorAll('button, [data-testid*="option"], .sc-1vg77x4-0'));
+            const schermOpties = Array.from(document.querySelectorAll('button, [data-testid*="option"], .sc-1vg77x4-0, .sc-klj6s2-0')).filter(isZichtbaar);
             const negeerTeksten = ['ik weet het niet', 'weet ik niet', 'geen idee', "don't know", 'i dont know'];
             let geanalyseerdeOpties = [];
 
@@ -362,12 +379,15 @@ function createSmartProbabilityTranslatorGUI() {
 
             geanalyseerdeOpties.sort((a, b) => b.score - a.score);
 
-            if (geanalyseerdeOpties.length > 0) {
+            if (geanalyseerdeOpties.length > 0 && isZichtbaar(geanalyseerdeOpties[0].element)) {
                 const besteMatch = geanalyseerdeOpties[0];
                 if (besteMatch.nummer) verstuurToetsDruk(besteMatch.nummer);
                 besteMatch.element.click();
+
+                await new Promise(r => setTimeout(r, 50));
+                klikVolgendeKnopOfEnter();
             } else {
-                statusBox.innerHTML = `💡 Geen geschikte opties gevonden.`;
+                statusBox.innerHTML = `💡 Geen zichtbare antwoordopties gevonden op het scherm.`;
             }
         } finally {
             isVerwerkenBezig = false;
